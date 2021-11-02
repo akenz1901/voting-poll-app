@@ -18,6 +18,12 @@ class DetailView(generic.DetailView):
     model = Question
     template_name = 'polls/details.html'
 
+    def get_queryset(self):
+        """
+        This method filter the recent posts and the statement below means constraint.
+        """
+        return Question.objects.filter(published_date=timezone.now()).order_by('-published_date')[:5]
+
 
 class ResultsView(generic.DetailView):
     model = Question
