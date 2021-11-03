@@ -11,7 +11,7 @@ class IndexView(generic.ListView):
     context_object_name = 'latest_question_list'
 
     def get_queryset(self):
-        return Question.objects.filter(published_date=timezone.now()).order_by('-published_date')[:5]
+        return Question.objects.filter(published_date__lte=timezone.now()).order_by('-published_date')[:5]
 
 
 class DetailView(generic.DetailView):
@@ -22,7 +22,7 @@ class DetailView(generic.DetailView):
         """
         This method filter the recent posts and the statement below means constraint.
         """
-        return Question.objects.filter(published_date=timezone.now()).order_by('-published_date')[:5]
+        return Question.objects.filter(published_date__lte=timezone.now())
 
 
 class ResultsView(generic.DetailView):
