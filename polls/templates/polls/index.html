@@ -1,7 +1,9 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link href="{% static 'polls/style.css' %}" rel="stylesheet" type="text/css">
     <title>Poll App</title>
 </head>
 <body>
@@ -12,7 +14,7 @@
             {% endfor %}
         </ul>
     {% else %}
-    <p>No post available</p>
+    <p>No polls are available.</p>
     {% endif %}
 </body>
 </html>
