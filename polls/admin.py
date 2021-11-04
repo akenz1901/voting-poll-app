@@ -3,9 +3,23 @@ from django.contrib import admin
 from .models import Question, Choice
 
 
+# class ChoiceInline(admin.StackedInline):
+#     model = Choice
+#     extra = 3
+
+class ChoiceInline(admin.TabularInline):
+    model = Choice
+    extra = 3
+
+
 class QuestionAdmin(admin.ModelAdmin):
-    fields = ['published_date', 'question_text']
+    fieldsets = [
+        (None, {'fields': ['question_text']}),
+        ('Date information', {'fields': ['published_date']}),
+    ]
+    list_display = ('question_text', 'published_date', 'was_published_recently')
+    inlines = [ChoiceInline]
+    # fields = ['published_date', 'question_text']
 
 
 admin.site.register(Question, QuestionAdmin)
-admin.site.register(Choice)
